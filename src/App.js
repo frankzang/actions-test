@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-// import { db } from "./firebase";
+import { db } from "./firebase";
 
 const appConfig = process.env.REACT_APP_FIREBASE_CONFIG;
 
 console.log(appConfig);
 
 function App() {
-  // useEffect(() => {
-  //   db.collection("users")
-  //     .doc("test")
-  //     .get()
-  //     .then((res) => {
-  //       console.log(res.data());
-  //     })
-  //     .catch((err) => console.log({ err }));
-  // }, []);
+  useEffect(() => {
+    db.collection("users")
+      .doc("test")
+      .get()
+      .then((res) => {
+        console.log(res.data());
+      })
+      .catch((err) => console.log({ err }));
+  }, []);
 
   const appConfig = process.env.REACT_APP_FIREBASE_CONFIG;
 
