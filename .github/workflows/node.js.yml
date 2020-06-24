@@ -35,6 +35,10 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build
+          
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
