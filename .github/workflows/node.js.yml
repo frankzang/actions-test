@@ -31,6 +31,7 @@ jobs:
           args: deploy -P dev --only hosting
         env:
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+            REACT_APP_FIREBASE_CONFIG: secrets.REACT_APP_FIREBASE_DEV
 
       - name: Deploy Prod
         if: github.ref == 'refs/heads/master'
@@ -39,3 +40,4 @@ jobs:
           args: deploy -P prod --only hosting
         env:
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+            REACT_APP_FIREBASE_CONFIG: secrets.REACT_APP_FIREBASE_PROD
