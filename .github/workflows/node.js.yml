@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - dev
 
 jobs:
   Deploy:
@@ -22,7 +23,15 @@ jobs:
       
       - name: Build
         run: npm run build
-      
+     
+      - name: Deploy Dev
+        if: github.ref == 'refs/heads/dev'
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy -P dev --only hosting
+        env:
+            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
       - name: Deploy Prod
         if: github.ref == 'refs/heads/master'
         uses: w9jds/firebase-action@master
