@@ -1,9 +1,8 @@
-name: Firebase Deploy
+name: Dev - Firebase Deploy
 on:
   push:
     branches:
-      - master
-      - dev
+      - '*'
 
 jobs:
   Deploy:
@@ -12,30 +11,17 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      
       - name: Install Dependencies
         run: npm install
-      
       - name: Run Tests
         env:
           CI: true
         run: npm test
-      
       - name: Build
         run: npm run build
-     
-      - name: Deploy Dev
-        if: github.ref == 'refs/heads/dev'
+      - name: Deploy
         uses: w9jds/firebase-action@master
         with:
           args: deploy -P dev --only hosting
-        env:
-            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
-      - name: Deploy Prod
-        if: github.ref == 'refs/heads/master'
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy -P prod --only hosting
         env:
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
