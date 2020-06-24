@@ -1,6 +1,6 @@
 import firebase from "firebase";
 
-const appConfig = process.env.REACT_APP_FIREBASE_CONFIG;
+const appConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
 
 firebase.initializeApp(appConfig);
 
