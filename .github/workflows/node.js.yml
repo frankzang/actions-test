@@ -23,11 +23,18 @@ jobs:
             
         run: npm test
       
-      - name: Build
+      - name: Build Dev
+        if: github.ref == 'refs/heads/dev'
         run: npm run build
         env:
           REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_DEV }}
-    
+
+      - name: Build Prod
+        if: github.ref == 'refs/heads/master'
+        run: npm run build
+        env:
+          REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_PROD }}
+
       - name: Deploy Dev
         if: github.ref == 'refs/heads/dev'
         uses: w9jds/firebase-action@master
@@ -35,7 +42,6 @@ jobs:
           args: deploy -P dev --only hosting
         env:
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-            REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_DEV }}
 
       - name: Deploy Prod
         if: github.ref == 'refs/heads/master'
@@ -44,4 +50,3 @@ jobs:
           args: deploy -P prod --only hosting
         env:
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-            REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_PROD }}
