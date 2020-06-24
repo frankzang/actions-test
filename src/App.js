@@ -1,27 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { db } from "./firebase";
+import { init } from "./firebase";
 
-const appConfig = process.env.REACT_APP_FIREBASE_CONFIG;
-
-console.log(appConfig);
+init();
 
 function App() {
-  useEffect(() => {
-    db.collection("users")
-      .doc("test")
-      .get()
-      .then((res) => {
-        console.log(res.data());
-      })
-      .catch((err) => console.log({ err }));
-  }, []);
-
-  const appConfig = process.env.REACT_APP_FIREBASE_CONFIG;
-
-  console.log(appConfig);
-
   return (
     <div className="App">
       <header className="App-header">
