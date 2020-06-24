@@ -2,7 +2,7 @@ name: Dev - Firebase Deploy
 on:
   push:
     branches:
-      - dev
+      - '*'
 
 jobs:
   Deploy:
