@@ -19,6 +19,8 @@ jobs:
       - name: Run Tests
         env:
           CI: true
+          REACT_APP_FIREBASE_CONFIG: secrets.REACT_APP_FIREBASE_DEV
+            
         run: npm test
       
       - name: Build
