@@ -4,15 +4,15 @@ import "./App.css";
 import { db } from "./firebase";
 
 function App() {
-  useEffect(() => {
-    db.collection("users")
-      .doc("test")
-      .get()
-      .then((res) => {
-        console.log(res.data());
-      })
-      .catch((err) => console.log({ err }));
-  }, []);
+  // useEffect(() => {
+  //   db.collection("users")
+  //     .doc("test")
+  //     .get()
+  //     .then((res) => {
+  //       console.log(res.data());
+  //     })
+  //     .catch((err) => console.log({ err }));
+  // }, []);
 
   return (
     <div className="App">
