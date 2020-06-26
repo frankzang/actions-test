@@ -1,0 +1,39 @@
+name: Firebase Deploy
+on:
+  push:
+    branches:
+      - master
+      - dev
+
+jobs:
+  Deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      
+      - name: Install Dependencies
+        run: npm install
+      
+      - name: Run Tests
+        env:
+          CI: true
+          REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_DEV }}
+            
+        run: npm test
+      
+      - name: Build
+        run: npm run build
+        env:
+          REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_DEV }}
+    
+      - name: Deploy Dev
+        if: github.ref == 'refs/heads/dev'
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy -P dev --only hosting
+        env:
+            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+            REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_DEV }}
+
